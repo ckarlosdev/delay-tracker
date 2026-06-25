@@ -1,0 +1,36 @@
+server:
+  port: 8086
+  error:
+    include-message: always
+
+spring:
+  application:
+    name: delay-tracker
+
+  datasource:
+    url: jdbc:mysql://localhost/delay_tracker_db?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
+    username: "${SPRING_DATASOURCE_USERNAME:ckarlosTest}"
+    password: "${SPRING_DATASOURCE_PASSWORD:tre35g}"
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: alpha
+    tags-sorter: alpha
+  api-docs:
+    path: /api-docs
+
+application:
+  security:
+    jwt:
+      secret-key: ${JWT_SECRET_KEY}
+  upload:
+    dir: ${UPLOAD_DIR:C:/hmbrandt/uploads/delay-log/signatures/}
+  base-url: ${APP_BASE_URL:http://localhost:8080}
