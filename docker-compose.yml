@@ -31,10 +31,11 @@ services:
       - UPLOAD_DIR=/app/uploads/delay-log/signatures/
       - APP_BASE_URL=https://api-gateway-px44.onrender.com
     volumes:
-      - ~/uploads/signatures:/app/uploads/delay-log/signatures/
+      - ~/uploads/delay-log/signatures:/app/uploads/delay-log/signatures/
     networks:
       - delay-tracker-net
 
 networks:
   delay-tracker-net:
+    external: true
     driver: bridge
