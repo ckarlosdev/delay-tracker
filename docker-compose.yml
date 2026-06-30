@@ -1,5 +1,5 @@
 services:
-  db-job:
+  db-delay-tracker:
     image: mysql:8.0
     container_name: db-delay-tracker
     restart: always
@@ -15,7 +15,7 @@ services:
     volumes:
       - ./mysql_data:/var/lib/mysql
 
-  job-management-service:
+  delay-tracker-service:
     build: .
     container_name: delay-tracker-service
     depends_on:
@@ -28,7 +28,7 @@ services:
       - SPRING_DATASOURCE_USERNAME=${DB_USER}
       - SPRING_DATASOURCE_PASSWORD=${DB_PASS}
       - APPLICATION_SECURITY_JWT_SECRET_KEY=${JWT_SECRET_KEY}
-      - UPLOAD_DIR=/app/uploads/signatures/
+      - UPLOAD_DIR=/app/uploads/delay-log/signatures/
       - APP_BASE_URL=https://api-gateway-px44.onrender.com
     volumes:
       - ~/uploads/signatures:/app/uploads/delay-log/signatures/
@@ -36,5 +36,5 @@ services:
       - delay-tracker-net
 
 networks:
-  job-net:
+  delay-tracker-net:
     driver: bridge
